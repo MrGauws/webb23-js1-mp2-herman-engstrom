@@ -97,7 +97,7 @@ function updateScoreboard() {
 
 function endGame(message) {
   resultText.textContent = message;
-  resultText.textContent = message.replace("You", name);
+  resultText.textContent = message.replace("You", playerName);
   rockBtn.disabled = true;
   paperBtn.disabled = true;
   scissorsBtn.disabled = true;
