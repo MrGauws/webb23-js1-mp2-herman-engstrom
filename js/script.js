@@ -38,14 +38,17 @@ function playRound(playerSelection) {
 
   const winner = getWinner(playerSelection, computerSelection);
 
+  // Display player and computer choices
+  resultText.textContent = `Round ${roundNumber}: ${name} chose ${playerSelection}, Computer chose ${computerSelection}. `;
+
   if (winner === "player") {
     playerScore++;
-    resultText.textContent = `Round ${roundNumber}: You win! ${playerSelection} beats ${computerSelection}`;
+    resultText.textContent += `You win! ${playerSelection} beats ${computerSelection}`;
   } else if (winner === "computer") {
     computerScore++;
-    resultText.textContent = `Round ${roundNumber}: You lose! ${computerSelection} beats ${playerSelection}`;
+    resultText.textContent += `Computer wins! ${computerSelection} beats ${playerSelection}`;
   } else {
-    resultText.textContent = `Round ${roundNumber}: It's a tie! You both chose ${playerSelection}`;
+    resultText.textContent += `It's a tie! You both chose ${playerSelection}`;
   }
 
   roundNumber++;
@@ -53,7 +56,7 @@ function playRound(playerSelection) {
   updateScoreboard();
 
   if (playerScore >= 3) {
-    endGame("Congratulations! You won!");
+    endGame(`Congratulations, ${name}! You won the game!`);
   } else if (computerScore >= 3) {
     endGame("Computer wins! Better luck next time.");
   }
@@ -92,11 +95,10 @@ function updateScoreboard() {
 
 function endGame(message) {
   resultText.textContent = message;
+  resultText.textContent = message.replace("You", name);
   rockBtn.disabled = true;
   paperBtn.disabled = true;
   scissorsBtn.disabled = true;
-  // Display the result message
-  result.textContent = message.replace("You", name);
 
   // Show the restart button
   restartBtn.style.display = "block";
