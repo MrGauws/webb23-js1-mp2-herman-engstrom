@@ -29,9 +29,11 @@ paperBtn.addEventListener("click", () => playRound(PAPER));
 scissorsBtn.addEventListener("click", () => playRound(SCISSORS));
 
 // ************************** FUNCTIONS ************************** //
-
-function startGame() {
-  name = document.getElementById('name').value;
+let playerName = "";
+function startGame(event) {
+  event.preventDefault(); // Prevent form submission from refreshing the page
+  playerName = document.getElementById('name').value;
+  updateScoreboard(); // Update the scoreboard with the player's name
 }
 function playRound(playerSelection) {
   const computerSelection = computerPlay();
@@ -39,8 +41,8 @@ function playRound(playerSelection) {
   const winner = getWinner(playerSelection, computerSelection);
 
   // Display player and computer choices
-  resultText.textContent = `Round ${roundNumber}: ${name} chose ${playerSelection}, Computer chose ${computerSelection}. `;
-
+  resultText.textContent = 'Round ' + roundNumber + ': ' + playerName + ' chose ' + playerSelection + ', Computer chose ' + computerSelection + '. ';
+  
   if (winner === "player") {
     playerScore++;
     resultText.textContent += `You win! ${playerSelection} beats ${computerSelection}`;
@@ -88,7 +90,7 @@ function getWinner(playerSelection, computerSelection) {
 
 function updateScoreboard() {
   const playerNameText = document.getElementById('player-score');
-  playerNameText.textContent = `${name}: ${playerScore}`;
+  playerNameText.textContent = `${playerName}: ${playerScore}`;
   const computerScoreText = document.getElementById('computer-score');
   computerScoreText.textContent = `Computer: ${computerScore}`;
 }
