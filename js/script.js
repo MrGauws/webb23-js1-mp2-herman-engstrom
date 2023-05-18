@@ -36,9 +36,10 @@ function startGame(event) {
   updateScoreboard(); // Update the scoreboard with the player's name
 }
 function playRound(playerSelection) {
-  const computerSelection = computerPlay();
-
-  const winner = getWinner(playerSelection, computerSelection);
+  // Get the computer's selection by calling the `computerPlay` function
+  const computerSelection = computerPlay(); 
+  // Determine the winner by calling the `getWinner` function with the users and computers selections
+  const winner = getWinner(playerSelection, computerSelection); 
 
   // Display player and computer choices
   resultText.textContent = 'Round ' + roundNumber + ': ' + playerName + ' chose ' + playerSelection + ', Computer chose ' + computerSelection + '. ';
@@ -52,38 +53,45 @@ function playRound(playerSelection) {
   } else {
     resultText.textContent += `It's a tie! You both chose ${playerSelection}`;
   }
-
+  // Increases the round number
   roundNumber++;
 
   updateScoreboard();
-
+  // If the users score is 3 it shows the user as winner.
   if (playerScore >= 3) {
     endGame(`Congratulations, ${playerName}! You won the game!`);
+    // If the computers score is 3 it shows the user as winner.
   } else if (computerScore >= 3) {
     endGame("Computer wins! Better luck next time.");
   }
 }
 
+// Create an array of available choices. 
+// Generate a random index within the range of the choices array. 
+// Return the choice at the randomly generated index. 
 function computerPlay() {
-  const choices = [ROCK, PAPER, SCISSORS];
-  const randomIndex = Math.floor(Math.random() * choices.length);
-  return choices[randomIndex];
+  const choices = [ROCK, PAPER, SCISSORS]; 
+  const randomIndex = Math.floor(Math.random() * choices.length); 
+  return choices[randomIndex]; 
 }
 
 function getWinner(playerSelection, computerSelection) {
   if (
-    (playerSelection === ROCK && computerSelection === SCISSORS) ||
-    (playerSelection === PAPER && computerSelection === ROCK) ||
-    (playerSelection === SCISSORS && computerSelection === PAPER)
+    (playerSelection === ROCK && computerSelection === SCISSORS) || // If the user chooses rock and the computer chooses scissors
+    (playerSelection === PAPER && computerSelection === ROCK) || // !Or if the user chooses paper and the computer chooses rock
+    (playerSelection === SCISSORS && computerSelection === PAPER) // !Or if the user chooses scissors and the computer chooses paper
   ) {
-    return "player";
+    // Return "player" indicating that the player wins
+    return "player"; 
   } else if (
     (computerSelection === ROCK && playerSelection === SCISSORS) ||
     (computerSelection === PAPER && playerSelection === ROCK) ||
     (computerSelection === SCISSORS && playerSelection === PAPER)
   ) {
-    return "computer";
+    // Return "computer" indicating that the computer wins
+    return "computer"; 
   } else {
+    // Return "tie" indicating a tie if none of the above conditions are met
     return "tie";
   }
 }
