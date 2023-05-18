@@ -87,17 +87,17 @@ function getWinner(playerSelection, computerSelection) {
     return "tie";
   }
 }
-
+// Updates the Scoreboard
 function updateScoreboard() {
   const playerNameText = document.getElementById('player-score');
   playerNameText.textContent = `${playerName}: ${playerScore}`;
   const computerScoreText = document.getElementById('computer-score');
   computerScoreText.textContent = `Computer: ${computerScore}`;
 }
-
 function endGame(message) {
-  resultText.textContent = message;
-  resultText.textContent = message.replace("You", playerName);
+  resultText.textContent = message; // Set the result text content to the provided message
+  resultText.textContent = message.replace("You", playerName); // Replace "You" with the player's name in the message
+  // Disables the buttons since round is over
   rockBtn.disabled = true;
   paperBtn.disabled = true;
   scissorsBtn.disabled = true;
@@ -106,20 +106,22 @@ function endGame(message) {
   restartBtn.style.display = "block";
 
 
-  restartBtn.textContent = "Restart Game";
-  restartBtn.addEventListener("click", () => {
+  restartBtn.textContent = "Restart Game"; // Set the restart button text to "Restart Game"
+  restartBtn.addEventListener("click", () => { // Adds a click event listener to the restart button
+    // Resets the playerscore since new round is incoming and sets the round to #1.
     playerScore = 0;
     computerScore = 0;
     roundNumber = 1;
-    updateScoreboard();
+    updateScoreboard(); // Update the scoreboard with the new scores and round number
 
-    resultText.textContent = "";
+    resultText.textContent = ""; // Clear the result text content
+    // Enables the buttons since round is starting
     rockBtn.disabled = false;
     paperBtn.disabled = false;
     scissorsBtn.disabled = false;
 
-    restartBtn.remove();
+    restartBtn.remove(); // Remove the restart button from the DOM
   });
 
-  document.querySelector("#game").appendChild(restartBtn);
+  document.querySelector("#game").appendChild(restartBtn); // Append the restart button to the game
 }
