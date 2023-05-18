@@ -58,7 +58,7 @@ function playRound(playerSelection) {
   updateScoreboard();
 
   if (playerScore >= 3) {
-    endGame(`Congratulations, ${name}! You won the game!`);
+    endGame(`Congratulations, ${playerName}! You won the game!`);
   } else if (computerScore >= 3) {
     endGame("Computer wins! Better luck next time.");
   }
